@@ -1,0 +1,30 @@
+cxxp measurement summary: sca_c_control
+wall_time: min-max (median) seconds; get_filesize: bytes of the output files
+
+step                    BIG         MID        NORM
+----------------------  ----------  ---------  ---------
+size_dump_calls         1032.1 MiB  520.9 MiB  289.2 MiB
+size_dump_access        983.7 MiB   481.4 MiB  269.0 MiB
+size_dump_access_c1b    983.7 MiB   481.4 MiB  269.0 MiB
+size_dump_flow          1424.9 MiB  686.8 MiB  348.5 MiB
+size_dump_flow_c1b      1424.9 MiB  686.8 MiB  348.5 MiB
+size_dump_flow_threads  1424.9 MiB  686.8 MiB  348.5 MiB
+size_link               79.4 MiB    63.5 MiB   30.9 MiB
+size_link_calls         102.1 MiB   82.2 MiB   40.2 MiB
+size_link_uses          166.7 MiB   132.3 MiB  64.4 MiB
+size_link_db            43.7 MiB    34.4 MiB   17.6 MiB
+
+compare: result of a file comparison ('-' = a file is missing)
+
+step                    BIG    MID    NORM
+----------------------  -----  -----  -----
+cmp_dump_access         equal  equal  equal
+cmp_dump_flow           equal  equal  equal
+cmp_dump_flow_threads   equal  equal  equal
+cmp_link_c1b            equal  equal  equal
+cmp_link_threads        equal  equal  equal
+cmp_link_calls_c1b      equal  equal  equal
+cmp_link_calls_threads  equal  equal  equal
+cmp_link_uses_threads   equal  equal  equal
+cmp_link_db             equal  equal  equal
+cmp_link_db_calls       equal  equal  equal

@@ -1,0 +1,110 @@
+cxxp measurement report
+=======================
+name       : sca_c_control_parser_base
+config     : sca_c_control_parser_base.json (sha256 e8eb0cbc6599)
+project    : BIG
+started    : 2026-11-07 10:29:23
+python     : 3.12.12
+platform   : Windows-11-10.0.26200-SP0, 24 logical CPUs
+obscured   : yes
+result     : 1 failed, 9 skipped
+
+[1] run: version_sca  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe --version
+    exit code 0, 0.08 s
+    output:
+      cxxp-sca-proj 0.1.0
+      allocator: mimalloc 2.5.2 (operator new: yes, malloc: NO)
+
+[2] run: version_sca_base  --  OK
+    command: <repo>/build/clang-release-base/src/sca/proj/cxxp-sca-proj.exe --version
+    exit code 0, 14.92 s
+    output:
+      cxxp-sca-proj 0.1.0
+      allocator: mimalloc 2.5.2 (operator new: yes, malloc: NO)
+
+[3] run: dump_calls  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=1 --prune --no-resolve-warnings --calls --dump-ast --stats --show-diagnostics --diagnostics-log=<work>/calls_current.log
+    exit code 0, 356.74 s
+    output:
+      stats: sca: sema (symbol and type resolution, in the result callback): 974.7 thread ms (6.5% of the analysis, n/a of stage b process), rest of the callback 11633.9 ms
+      stats: sca: sema: 5492988 symbols, 1054628 resolved types, 1843859 identifiers (0 unresolved, 0.0%), 575039 member accesses (0 unresolved), 7594426 typed expressions (804 without a type), 0 diagnostics
+      stats: sca: sema speed: 13.6 Mnodes/s per thread (declarations + expressions)
+      stats: sca: cfg (control flow graph, in the result callback): 117.3 thread ms (0.8% of the analysis, n/a of stage b process), rest of the callback 12491.2 ms
+      stats: sca: cfg: 68764 function graphs, 673554 blocks, 783040 edges, 1015686 items, 20 unreachable blocks (0.0%), 8 no-return calls
+      stats: sca: cfg speed: 12.0 Mstmts/s per thread
+      stats: sca: access (variable access analysis, in the result callback): 165.4 thread ms (1.1% of the analysis, n/a of stage b process), rest of the callback 12443.1 ms
+      stats: sca: access: 1868543 records (1070393 reads, 648777 writes, 175636 address-takes, 183610 indirect, 61233 pointer arithmetic), 657187 locations, 0 unresolved names
+      stats: sca: access speed: 45.9 Mexprs/s per thread
+      stats: sca: calls (call graph and function summaries, in the result callback): 176.8 thread ms (1.2% of the analysis, n/a of stage b process), rest of the callback 12431.8 ms
+      stats: sca: calls: 124345 functions (68764 defined), 186431 call sites (184254 direct, 1373 indirect, 804 builtin; 114699 reach code without a definition), 107102 edges, 10517 address-taken functions
+      stats: sca: recursion: 38 recursive functions in 22 cycles (4 call themselves), 124329 components in all
+      stats: sca: summaries: 24269 leaf functions, 14113 without side effects, 46374 without a caller in the TU, 11 inferred no-return
+      stats: sca: calls speed: 1.1 Mcallsites/s per thread
+
+[4] run: dump_calls_base  --  OK
+    command: <repo>/build/clang-release-base/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out_base --cache-dir=<work>/cache_base --quiet --executor-threads=1 --prune --no-resolve-warnings --calls --dump-ast --stats --show-diagnostics --diagnostics-log=<work>/calls_base.log
+    exit code 0, 261.18 s
+    output:
+      stats: sca: sema (symbol and type resolution, in the result callback): 962.0 thread ms (6.5% of the analysis, n/a of stage b process), rest of the callback 11568.8 ms
+      stats: sca: sema: 5492988 symbols, 1054628 resolved types, 1843859 identifiers (0 unresolved, 0.0%), 575039 member accesses (0 unresolved), 7594426 typed expressions (804 without a type), 0 diagnostics
+      stats: sca: sema speed: 13.7 Mnodes/s per thread (declarations + expressions)
+      stats: sca: cfg (control flow graph, in the result callback): 115.5 thread ms (0.8% of the analysis, n/a of stage b process), rest of the callback 12415.3 ms
+      stats: sca: cfg: 68764 function graphs, 673554 blocks, 783040 edges, 1015686 items, 20 unreachable blocks (0.0%), 8 no-return calls
+      stats: sca: cfg speed: 12.2 Mstmts/s per thread
+      stats: sca: access (variable access analysis, in the result callback): 168.2 thread ms (1.1% of the analysis, n/a of stage b process), rest of the callback 12362.6 ms
+      stats: sca: access: 1868543 records (1070393 reads, 648777 writes, 175636 address-takes, 183610 indirect, 61233 pointer arithmetic), 657187 locations, 0 unresolved names
+      stats: sca: access speed: 45.1 Mexprs/s per thread
+      stats: sca: calls (call graph and function summaries, in the result callback): 175.7 thread ms (1.2% of the analysis, n/a of stage b process), rest of the callback 12355.1 ms
+      stats: sca: calls: 124345 functions (68764 defined), 186431 call sites (184254 direct, 1373 indirect, 804 builtin; 114699 reach code without a definition), 107102 edges, 10517 address-taken functions
+      stats: sca: recursion: 38 recursive functions in 22 cycles (4 call themselves), 124329 components in all
+      stats: sca: summaries: 24269 leaf functions, 14113 without side effects, 46374 without a caller in the TU, 11 inferred no-return
+      stats: sca: calls speed: 1.1 Mcallsites/s per thread
+
+[5] compare: cmp_dump_calls  --  OK
+    a: <work>/out_base (8999 files, 1082235346 bytes (1032.10 MiB))
+    b: <work>/out (8999 files, 1082235346 bytes (1032.10 MiB))
+    result: EQUAL (8999 files byte-identical)
+
+[6] compare: cmp_call_stats  --  FAILED
+    a: <work>/logs/003_dump_calls.log (22799 bytes (0.02 MiB))
+    b: <work>/logs/004_dump_calls_base.log (8264 bytes (0.01 MiB))
+    result: DIFFERENT, 7 differing line(s) (14 and 14 lines compared)
+      line 1 a: stats: sca: sema (symbol and type resolution, in the result callback): 974.7 thread ms (6.5% of the analysis, n/a of stage b process), rest of the callback 11633.9 4b43b0ae
+      line 1 b: stats: sca: sema (symbol and type resolution, in the result callback): 962.0 thread ms (6.5% of the analysis, n/a of stage b process), rest of the callback 11568.8 4b43b0ae
+      line 3 a: stats: sca: sema speed: 13.6 Mnodes/s per thread (declarations + expressions)4b43b0ae
+      line 3 b: stats: sca: sema speed: 13.7 Mnodes/s per thread (declarations + expressions)4b43b0ae
+      line 4 a: stats: sca: cfg (control flow graph, in the result callback): 117.3 thread ms (0.8% of the analysis, n/a of stage b process), rest of the callback 12491.2 4b43b0ae
+      line 4 b: stats: sca: cfg (control flow graph, in the result callback): 115.5 thread ms (0.8% of the analysis, n/a of stage b process), rest of the callback 12415.3 4b43b0ae
+      line 6 a: stats: sca: cfg speed: 12.0 Mstmts/s per 4b43b0ae
+      line 6 b: stats: sca: cfg speed: 12.2 Mstmts/s per 4b43b0ae
+      line 7 a: stats: sca: access (variable access analysis, in the result callback): 165.4 thread ms (1.1% of the analysis, n/a of stage b process), rest of the callback 12443.1 4b43b0ae
+      line 7 b: stats: sca: access (variable access analysis, in the result callback): 168.2 thread ms (1.1% of the analysis, n/a of stage b process), rest of the callback 12362.6 4b43b0ae
+    NOTE: the files differ: 7 differing line(s), sizes 22799 and 8264 bytes
+
+[7] run: decl_diagnostics  --  SKIPPED
+    NOTE: an earlier step failed
+
+[8] run: decl_diagnostics_base  --  SKIPPED
+    NOTE: an earlier step failed
+
+[9] compare: cmp_decl_diagnostics  --  SKIPPED
+    NOTE: an earlier step failed
+
+[10] run: body_diagnostics  --  SKIPPED
+    NOTE: an earlier step failed
+
+[11] run: body_diagnostics_base  --  SKIPPED
+    NOTE: an earlier step failed
+
+[12] compare: cmp_body_diagnostics  --  SKIPPED
+    NOTE: an earlier step failed
+
+[13] run: link_calls  --  SKIPPED
+    NOTE: an earlier step failed
+
+[14] run: link_calls_base  --  SKIPPED
+    NOTE: an earlier step failed
+
+[15] compare: cmp_link_calls  --  SKIPPED
+    NOTE: an earlier step failed

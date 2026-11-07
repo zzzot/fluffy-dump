@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "name": "sca_c_control_parser_base",
+    "config_name": "sca_c_control_parser_base.json",
+    "config_sha": "e8eb0cbc6599",
+    "alias": "NORM",
+    "started": "2026-11-07 10:48:01",
+    "python": "3.12.12",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpus": 24,
+    "obscured": true,
+    "summary": "1 failed, 9 skipped"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "type": "run",
+      "label": "version_sca",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "--version"
+      ],
+      "seconds": 0.0829643999459222,
+      "rc": 0,
+      "output": [
+        "cxxp-sca-proj 0.1.0",
+        "allocator: mimalloc 2.5.2 (operator new: yes, malloc: NO)"
+      ]
+    },
+    {
+      "index": 2,
+      "type": "run",
+      "label": "version_sca_base",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release-base/src/sca/proj/cxxp-sca-proj.exe",
+        "--version"
+      ],
+      "seconds": 0.06525280000641942,
+      "rc": 0,
+      "output": [
+        "cxxp-sca-proj 0.1.0",
+        "allocator: mimalloc 2.5.2 (operator new: yes, malloc: NO)"
+      ]
+    },
+    {
+      "index": 3,
+      "type": "run",
+      "label": "dump_calls",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=1",
+        "--prune",
+        "--no-resolve-warnings",
+        "--calls",
+        "--dump-ast",
+        "--stats",
+        "--show-diagnostics",
+        "--diagnostics-log=<work>/calls_current.log"
+      ],
+      "seconds": 76.82473400002345,
+      "rc": 0,
+      "output": [
+        "stats: sca: sema (symbol and type resolution, in the result callback): 317.0 thread ms (5.7% of the analysis, n/a of stage b process), rest of the callback 4252.8 ms",
+        "stats: sca: sema: 1090730 symbols, 209968 resolved types, 780299 identifiers (0 unresolved, 0.0%), 206411 member accesses (0 unresolved), 3988886 typed expressions (1059 without a type), 0 diagnostics",
+        "stats: sca: sema speed: 16.1 Mnodes/s per thread (declarations + expressions)",
+        "stats: sca: cfg (control flow graph, in the result callback): 51.3 thread ms (0.9% of the analysis, n/a of stage b process), rest of the callback 4518.5 ms",
+        "stats: sca: cfg: 31728 function graphs, 258830 blocks, 287819 edges, 378872 items, 9 unreachable blocks (0.0%), 6 no-return calls",
+        "stats: sca: cfg speed: 10.4 Mstmts/s per thread",
+        "stats: sca: access (variable access analysis, in the result callback): 77.4 thread ms (1.4% of the analysis, n/a of stage b process), rest of the callback 4492.4 ms",
+        "stats: sca: access: 817731 records (553681 reads, 226294 writes, 52618 address-takes, 135568 indirect, 32825 pointer arithmetic), 268090 locations, 0 unresolved names",
+        "stats: sca: access speed: 51.5 Mexprs/s per thread",
+        "stats: sca: calls (call graph and function summaries, in the result callback): 91.9 thread ms (1.7% of the analysis, n/a of stage b process), rest of the callback 4478.0 ms",
+        "stats: sca: calls: 52608 functions (31728 defined), 92922 call sites (90791 direct, 1072 indirect, 1059 builtin; 46982 reach code without a definition), 51517 edges, 2891 address-taken functions",
+        "stats: sca: recursion: 34 recursive functions in 19 cycles (1 call themselves), 52593 components in all",
+        "stats: sca: summaries: 11092 leaf functions, 7940 without side effects, 13362 without a caller in the TU, 8 inferred no-return",
+        "stats: sca: calls speed: 1.0 Mcallsites/s per thread"
+      ]
+    },
+    {
+      "index": 4,
+      "type": "run",
+      "label": "dump_calls_base",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release-base/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out_base",
+        "--cache-dir=<work>/cache_base",
+        "--quiet",
+        "--executor-threads=1",
+        "--prune",
+        "--no-resolve-warnings",
+        "--calls",
+        "--dump-ast",
+        "--stats",
+        "--show-diagnostics",
+        "--diagnostics-log=<work>/calls_base.log"
+      ],
+      "seconds": 77.18382619996555,
+      "rc": 0,
+      "output": [
+        "stats: sca: sema (symbol and type resolution, in the result callback): 320.7 thread ms (5.8% of the analysis, n/a of stage b process), rest of the callback 4305.5 ms",
+        "stats: sca: sema: 1090730 symbols, 209968 resolved types, 780299 identifiers (0 unresolved, 0.0%), 206411 member accesses (0 unresolved), 3988886 typed expressions (1059 without a type), 0 diagnostics",
+        "stats: sca: sema speed: 15.9 Mnodes/s per thread (declarations + expressions)",
+        "stats: sca: cfg (control flow graph, in the result callback): 51.9 thread ms (0.9% of the analysis, n/a of stage b process), rest of the callback 4574.3 ms",
+        "stats: sca: cfg: 31728 function graphs, 258830 blocks, 287819 edges, 378872 items, 9 unreachable blocks (0.0%), 6 no-return calls",
+        "stats: sca: cfg speed: 10.3 Mstmts/s per thread",
+        "stats: sca: access (variable access analysis, in the result callback): 80.4 thread ms (1.4% of the analysis, n/a of stage b process), rest of the callback 4545.8 ms",
+        "stats: sca: access: 817731 records (553681 reads, 226294 writes, 52618 address-takes, 135568 indirect, 32825 pointer arithmetic), 268090 locations, 0 unresolved names",
+        "stats: sca: access speed: 49.6 Mexprs/s per thread",
+        "stats: sca: calls (call graph and function summaries, in the result callback): 92.3 thread ms (1.7% of the analysis, n/a of stage b process), rest of the callback 4533.9 ms",
+        "stats: sca: calls: 52608 functions (31728 defined), 92922 call sites (90791 direct, 1072 indirect, 1059 builtin; 46982 reach code without a definition), 51517 edges, 2891 address-taken functions",
+        "stats: sca: recursion: 34 recursive functions in 19 cycles (1 call themselves), 52593 components in all",
+        "stats: sca: summaries: 11092 leaf functions, 7940 without side effects, 13362 without a caller in the TU, 8 inferred no-return",
+        "stats: sca: calls speed: 1.0 Mcallsites/s per thread"
+      ]
+    },
+    {
+      "index": 5,
+      "type": "compare",
+      "label": "cmp_dump_calls",
+      "status": "ok",
+      "a": "<work>/out_base",
+      "b": "<work>/out",
+      "dir": true,
+      "files_a": 4621,
+      "files_b": 4621,
+      "size_a": 303204298,
+      "size_b": 303204298,
+      "differing": 0,
+      "only_a": [],
+      "only_b": [],
+      "n_only_a": 0,
+      "n_only_b": 0,
+      "diff_files": [],
+      "equal": true,
+      "verdict": "equal"
+    },
+    {
+      "index": 6,
+      "type": "compare",
+      "label": "cmp_call_stats",
+      "status": "failed",
+      "a": "<work>/logs/003_dump_calls.log",
+      "b": "<work>/logs/004_dump_calls_base.log",
+      "size_a": 23048,
+      "size_b": 8089,
+      "diff_lines": 7,
+      "diffs": [
+        [
+          1,
+          "stats: sca: sema (symbol and type resolution, in the result callback): 317.0 thread ms (5.7% of the analysis, n/a of stage b process), rest of the callback 4252.8 ms\r\r",
+          "stats: sca: sema (symbol and type resolution, in the result callback): 320.7 thread ms (5.8% of the analysis, n/a of stage b process), rest of the callback 4305.5 ms\r\r"
+        ],
+        [
+          3,
+          "stats: sca: sema speed: 16.1 Mnodes/s per thread (declarations + expressions)\r\r",
+          "stats: sca: sema speed: 15.9 Mnodes/s per thread (declarations + expressions)\r\r"
+        ],
+        [
+          4,
+          "stats: sca: cfg (control flow graph, in the result callback): 51.3 thread ms (0.9% of the analysis, n/a of stage b process), rest of the callback 4518.5 ms\r\r",
+          "stats: sca: cfg (control flow graph, in the result callback): 51.9 thread ms (0.9% of the analysis, n/a of stage b process), rest of the callback 4574.3 ms\r\r"
+        ],
+        [
+          6,
+          "stats: sca: cfg speed: 10.4 Mstmts/s per thread\r\r",
+          "stats: sca: cfg speed: 10.3 Mstmts/s per thread\r\r"
+        ],
+        [
+          7,
+          "stats: sca: access (variable access analysis, in the result callback): 77.4 thread ms (1.4% of the analysis, n/a of stage b process), rest of the callback 4492.4 ms\r\r",
+          "stats: sca: access (variable access analysis, in the result callback): 80.4 thread ms (1.4% of the analysis, n/a of stage b process), rest of the callback 4545.8 ms\r\r"
+        ]
+      ],
+      "equal": false,
+      "lines_a": 14,
+      "lines_b": 14,
+      "verdict": "different",
+      "note": "the files differ: 7 differing line(s), sizes 23048 and 8089 bytes"
+    },
+    {
+      "index": 7,
+      "type": "run",
+      "label": "decl_diagnostics",
+      "status": "skipped",
+      "note": "an earlier step failed"
+    },
+    {
+      "index": 8,
+      "type": "run",
+      "label": "decl_diagnostics_base",
+      "status": "skipped",
+      "note": "an earlier step failed"
+    },
+    {
+      "index": 9,
+      "type": "compare",
+      "label": "cmp_decl_diagnostics",
+      "status": "skipped",
+      "note": "an earlier step failed"
+    },
+    {
+      "index": 10,
+      "type": "run",
+      "label": "body_diagnostics",
+      "status": "skipped",
+      "note": "an earlier step failed"
+    },
+    {
+      "index": 11,
+      "type": "run",
+      "label": "body_diagnostics_base",
+      "status": "skipped",
+      "note": "an earlier step failed"
+    },
+    {
+      "index": 12,
+      "type": "compare",
+      "label": "cmp_body_diagnostics",
+      "status": "skipped",
+      "note": "an earlier step failed"
+    },
+    {
+      "index": 13,
+      "type": "run",
+      "label": "link_calls",
+      "status": "skipped",
+      "note": "an earlier step failed"
+    },
+    {
+      "index": 14,
+      "type": "run",
+      "label": "link_calls_base",
+      "status": "skipped",
+      "note": "an earlier step failed"
+    },
+    {
+      "index": 15,
+      "type": "compare",
+      "label": "cmp_link_calls",
+      "status": "skipped",
+      "note": "an earlier step failed"
+    }
+  ]
+}

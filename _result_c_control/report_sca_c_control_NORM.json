@@ -1,0 +1,876 @@
+{
+  "meta": {
+    "name": "sca_c_control",
+    "config_name": "sca_c_control.json",
+    "config_sha": "9f5b74fce865",
+    "alias": "NORM",
+    "started": "2026-11-07 10:10:40",
+    "python": "3.12.12",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpus": 24,
+    "obscured": true,
+    "summary": "all steps ok"
+  },
+  "steps": [
+    {
+      "index": 1,
+      "type": "run",
+      "label": "version_sca",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "--version"
+      ],
+      "seconds": 0.053673399961553514,
+      "rc": 0,
+      "output": [
+        "cxxp-sca-proj 0.1.0",
+        "allocator: mimalloc 2.5.2 (operator new: yes, malloc: NO)"
+      ]
+    },
+    {
+      "index": 2,
+      "type": "run",
+      "label": "dump_calls",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=16",
+        "--prune",
+        "--no-resolve-warnings",
+        "--calls",
+        "--dump-ast",
+        "--stats"
+      ],
+      "seconds": 18.991956899990328,
+      "rc": 0,
+      "output": [
+        "stats: sca: sema (symbol and type resolution, in the result callback): 545.5 thread ms (3.7% of the analysis, 0.3% of stage b process), rest of the callback 12486.0 ms",
+        "stats: sca: sema: 1090730 symbols, 209968 resolved types, 780299 identifiers (0 unresolved, 0.0%), 206411 member accesses (0 unresolved), 3988886 typed expressions (1059 without a type), 0 diagnostics",
+        "stats: sca: sema speed: 9.4 Mnodes/s per thread (declarations + expressions)",
+        "stats: sca: cfg (control flow graph, in the result callback): 91.2 thread ms (0.6% of the analysis, 0.0% of stage b process), rest of the callback 12940.3 ms",
+        "stats: sca: cfg: 31728 function graphs, 258830 blocks, 287819 edges, 378872 items, 9 unreachable blocks (0.0%), 6 no-return calls",
+        "stats: sca: cfg speed: 5.9 Mstmts/s per thread",
+        "stats: sca: access (variable access analysis, in the result callback): 133.8 thread ms (0.9% of the analysis, 0.1% of stage b process), rest of the callback 12897.7 ms",
+        "stats: sca: access: 817731 records (553681 reads, 226294 writes, 52618 address-takes, 135568 indirect, 32825 pointer arithmetic), 268090 locations, 0 unresolved names",
+        "stats: sca: access speed: 29.8 Mexprs/s per thread",
+        "stats: sca: calls (call graph and function summaries, in the result callback): 151.1 thread ms (1.0% of the analysis, 0.1% of stage b process), rest of the callback 12880.5 ms",
+        "stats: sca: calls: 52608 functions (31728 defined), 92922 call sites (90791 direct, 1072 indirect, 1059 builtin; 46982 reach code without a definition), 51517 edges, 2891 address-taken functions",
+        "stats: sca: recursion: 34 recursive functions in 19 cycles (1 call themselves), 52593 components in all",
+        "stats: sca: summaries: 11092 leaf functions, 7940 without side effects, 13362 without a caller in the TU, 8 inferred no-return",
+        "stats: sca: calls speed: 0.6 Mcallsites/s per thread"
+      ]
+    },
+    {
+      "index": 3,
+      "type": "get_filesize",
+      "label": "size_dump_calls",
+      "status": "ok",
+      "path": "<work>/out",
+      "files": 4621,
+      "bytes": 303204298,
+      "patterns": [
+        "*.ast.txt"
+      ],
+      "manifest_bytes": null,
+      "total_bytes": 303204298
+    },
+    {
+      "index": 4,
+      "type": "run",
+      "label": "dump_access",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=16",
+        "--prune",
+        "--no-resolve-warnings",
+        "--access",
+        "--dump-ast",
+        "--stats"
+      ],
+      "seconds": 14.047939499956556,
+      "rc": 0,
+      "output": [
+        "stats: sca: sema (symbol and type resolution, in the result callback): 606.6 thread ms (4.5% of the analysis, 0.4% of stage b process), rest of the callback 11253.5 ms",
+        "stats: sca: sema: 1090730 symbols, 209968 resolved types, 780299 identifiers (0 unresolved, 0.0%), 206411 member accesses (0 unresolved), 3988886 typed expressions (1059 without a type), 0 diagnostics",
+        "stats: sca: sema speed: 8.4 Mnodes/s per thread (declarations + expressions)",
+        "stats: sca: cfg (control flow graph, in the result callback): 97.7 thread ms (0.7% of the analysis, 0.1% of stage b process), rest of the callback 11762.4 ms",
+        "stats: sca: cfg: 31728 function graphs, 258830 blocks, 287819 edges, 378872 items, 9 unreachable blocks (0.0%), 6 no-return calls",
+        "stats: sca: cfg speed: 5.5 Mstmts/s per thread",
+        "stats: sca: access (variable access analysis, in the result callback): 149.1 thread ms (1.1% of the analysis, 0.1% of stage b process), rest of the callback 11710.9 ms",
+        "stats: sca: access: 817731 records (553681 reads, 226294 writes, 52618 address-takes, 135568 indirect, 32825 pointer arithmetic), 268090 locations, 0 unresolved names",
+        "stats: sca: access speed: 26.7 Mexprs/s per thread"
+      ]
+    },
+    {
+      "index": 5,
+      "type": "get_filesize",
+      "label": "size_dump_access",
+      "status": "ok",
+      "path": "<work>/out",
+      "files": 4621,
+      "bytes": 282101797,
+      "patterns": [
+        "*.ast.txt"
+      ],
+      "manifest_bytes": null,
+      "total_bytes": 282101797
+    },
+    {
+      "index": 6,
+      "type": "rename",
+      "label": "rename6",
+      "status": "ok",
+      "from": "<work>/out",
+      "to": "<work>/out_dump_access"
+    },
+    {
+      "index": 7,
+      "type": "run",
+      "label": "dump_access_c1b",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=16",
+        "--prune",
+        "--no-resolve-warnings",
+        "--cfg-c1b",
+        "--access-c1b",
+        "--dump-ast",
+        "--stats"
+      ],
+      "seconds": 13.750317299971357,
+      "rc": 0,
+      "output": [
+        "stats: sca: sema (symbol and type resolution, in the result callback): 656.5 thread ms (4.9% of the analysis, 0.4% of stage b process), rest of the callback 10873.7 ms",
+        "stats: sca: sema: 1090730 symbols, 209968 resolved types, 780299 identifiers (0 unresolved, 0.0%), 206411 member accesses (0 unresolved), 3988886 typed expressions (1059 without a type), 0 diagnostics",
+        "stats: sca: sema speed: 7.8 Mnodes/s per thread (declarations + expressions)",
+        "stats: sca: cfg (control flow graph, in the result callback): 96.4 thread ms (0.7% of the analysis, 0.1% of stage b process), rest of the callback 11433.9 ms",
+        "stats: sca: cfg: 31728 function graphs, 258830 blocks, 287819 edges, 378872 items, 9 unreachable blocks (0.0%), 6 no-return calls",
+        "stats: sca: cfg speed: 5.6 Mstmts/s per thread",
+        "stats: sca: access (variable access analysis, in the result callback): 152.3 thread ms (1.1% of the analysis, 0.1% of stage b process), rest of the callback 11377.9 ms",
+        "stats: sca: access: 817731 records (553681 reads, 226294 writes, 52618 address-takes, 135568 indirect, 32825 pointer arithmetic), 268090 locations, 0 unresolved names",
+        "stats: sca: access speed: 26.2 Mexprs/s per thread"
+      ]
+    },
+    {
+      "index": 8,
+      "type": "get_filesize",
+      "label": "size_dump_access_c1b",
+      "status": "ok",
+      "path": "<work>/out",
+      "files": 4621,
+      "bytes": 282101797,
+      "patterns": [
+        "*.ast.txt"
+      ],
+      "manifest_bytes": null,
+      "total_bytes": 282101797
+    },
+    {
+      "index": 9,
+      "type": "compare",
+      "label": "cmp_dump_access",
+      "status": "ok",
+      "a": "<work>/out_dump_access",
+      "b": "<work>/out",
+      "dir": true,
+      "files_a": 4621,
+      "files_b": 4621,
+      "size_a": 282101797,
+      "size_b": 282101797,
+      "differing": 0,
+      "only_a": [],
+      "only_b": [],
+      "n_only_a": 0,
+      "n_only_b": 0,
+      "diff_files": [],
+      "equal": true,
+      "verdict": "equal"
+    },
+    {
+      "index": 10,
+      "type": "remove",
+      "label": "remove10",
+      "status": "ok",
+      "paths": [
+        "<work>/out",
+        "<work>/out_dump_access"
+      ]
+    },
+    {
+      "index": 11,
+      "type": "run",
+      "label": "dump_flow",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=16",
+        "--prune",
+        "--no-resolve-warnings",
+        "--flow",
+        "--dump-ast",
+        "--stats"
+      ],
+      "seconds": 14.233564499998465,
+      "rc": 0,
+      "output": [
+        "stats: sca: cfg (control flow graph, in the result callback): 94.0 thread ms (0.5% of the analysis, 0.1% of stage b process), rest of the callback 15980.7 ms",
+        "stats: sca: cfg: 31728 function graphs, 258830 blocks, 287819 edges, 378872 items, 9 unreachable blocks (0.0%), 6 no-return calls",
+        "stats: sca: cfg speed: 5.7 Mstmts/s per thread",
+        "stats: sca: access (variable access analysis, in the result callback): 149.2 thread ms (0.8% of the analysis, 0.1% of stage b process), rest of the callback 15925.6 ms",
+        "stats: sca: access: 817731 records (553681 reads, 226294 writes, 52618 address-takes, 135568 indirect, 32825 pointer arithmetic), 268090 locations, 0 unresolved names",
+        "stats: sca: access speed: 26.7 Mexprs/s per thread",
+        "stats: sca: calls (call graph and function summaries, in the result callback): 162.0 thread ms (0.9% of the analysis, 0.1% of stage b process), rest of the callback 15912.8 ms",
+        "stats: sca: calls: 52608 functions (31728 defined), 92922 call sites (90791 direct, 1072 indirect, 1059 builtin; 46982 reach code without a definition), 51517 edges, 2891 address-taken functions",
+        "stats: sca: calls speed: 0.6 Mcallsites/s per thread",
+        "stats: sca: flow (dataflow, alias and dependency analysis, in the result callback): 537.6 thread ms (3.0% of the analysis, 0.3% of stage b process), rest of the callback 15537.2 ms",
+        "stats: sca: flow parts (thread ms): points-to 187.6 (34.9%), def-use 265.4 (49.4%), dependencies 48.4 (9.0%), pointer arithmetic 18.3 (3.4%)",
+        "stats: sca: flow hot function #1: TrbCh_OffsLrn_Proc_10ms (<NORM>/045db496.c:249) 5681 reaching pairs, 1761 definitions (74 by calls), 1971 uses, 857 blocks",
+        "stats: sca: flow hot function #2: TrbCh_PosnCtrl_Proc_Diag_10ms (<NORM>/94f5f5e5.c:3440) 4194 reaching pairs, 1610 definitions (31 by calls), 1564 uses, 713 blocks",
+        "stats: sca: flow hot function #3: ExhMod_TMdl_Proc_50ms (<NORM>/85a65175.c:1980) 3827 reaching pairs, 983 definitions (155 by calls), 2391 uses, 363 blocks",
+        "stats: sca: flow hot function #4: rba_IoSigRtc_Prv_CounterDiag (<NORM>/5e58e2da.c:194) 3502 reaching pairs, 215 definitions (76 by calls), 289 uses, 148 blocks",
+        "stats: sca: flow hot function #5: mcop_MsgRcvOS_10ms_Task_Proc (<NORM>/b580f0e9.c:134156) 3488 reaching pairs, 6598 definitions (12 by calls), 3332 uses, 81 blocks",
+        "stats: sca: flow hot function #6: MoFDrDem_Co_Proc (<NORM>/6f6a5b14.c:452) 3390 reaching pairs, 953 definitions (223 by calls), 1544 uses, 395 blocks",
+        "stats: sca: flow hot function #7: TrbCh_PosnCtrl_Proc_Ctrl_1ms (<NORM>/94f5f5e5.c:223) 2823 reaching pairs, 1532 definitions (14 by calls), 1918 uses, 303 blocks",
+        "stats: sca: flow hot function #8: rba_IoExtFscSrv_P0_D0_SetupSpiEb (<NORM>/ab9f05dd.c:1734) 2800 reaching pairs, 286 definitions (130 by calls), 128 uses, 191 blocks",
+        "stats: sca: flow hot function #9: rba_IoExtFscSrv_P0_D1_SetupSpiEb (<NORM>/ab9f05dd.c:2844) 2800 reaching pairs, 286 definitions (130 by calls), 128 uses, 191 blocks",
+        "stats: sca: flow hot function #10: CILCN_Adap_Proc_SyncS0 (<NORM>/84340e8d.c:1076) 2408 reaching pairs, 743 definitions (62 by calls), 1297 uses, 349 blocks",
+        "stats: sca: flow speed: 7.4 Mexprs/s per thread"
+      ]
+    },
+    {
+      "index": 12,
+      "type": "get_filesize",
+      "label": "size_dump_flow",
+      "status": "ok",
+      "path": "<work>/out",
+      "files": 4621,
+      "bytes": 365430775,
+      "patterns": [
+        "*.ast.txt"
+      ],
+      "manifest_bytes": null,
+      "total_bytes": 365430775
+    },
+    {
+      "index": 13,
+      "type": "rename",
+      "label": "rename13",
+      "status": "ok",
+      "from": "<work>/out",
+      "to": "<work>/out_dump_flow"
+    },
+    {
+      "index": 14,
+      "type": "run",
+      "label": "dump_flow_c1b",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=16",
+        "--prune",
+        "--no-resolve-warnings",
+        "--flow-c1b",
+        "--dump-ast",
+        "--stats"
+      ],
+      "seconds": 13.836346699972637,
+      "rc": 0,
+      "output": [
+        "stats: sca: cfg (control flow graph, in the result callback): 98.2 thread ms (0.6% of the analysis, 0.1% of stage b process), rest of the callback 14324.1 ms",
+        "stats: sca: cfg: 31728 function graphs, 258830 blocks, 287819 edges, 378872 items, 9 unreachable blocks (0.0%), 6 no-return calls",
+        "stats: sca: cfg speed: 5.4 Mstmts/s per thread",
+        "stats: sca: access (variable access analysis, in the result callback): 150.7 thread ms (0.9% of the analysis, 0.1% of stage b process), rest of the callback 14271.6 ms",
+        "stats: sca: access: 817731 records (553681 reads, 226294 writes, 52618 address-takes, 135568 indirect, 32825 pointer arithmetic), 268090 locations, 0 unresolved names",
+        "stats: sca: access speed: 26.5 Mexprs/s per thread",
+        "stats: sca: calls (call graph and function summaries, in the result callback): 176.5 thread ms (1.1% of the analysis, 0.1% of stage b process), rest of the callback 14245.8 ms",
+        "stats: sca: calls: 52608 functions (31728 defined), 92922 call sites (90791 direct, 1072 indirect, 1059 builtin; 46982 reach code without a definition), 51517 edges, 2891 address-taken functions",
+        "stats: sca: calls speed: 0.5 Mcallsites/s per thread",
+        "stats: sca: flow (dataflow, alias and dependency analysis, in the result callback): 533.0 thread ms (3.3% of the analysis, 0.3% of stage b process), rest of the callback 13889.3 ms",
+        "stats: sca: flow parts (thread ms): points-to 189.3 (35.5%), def-use 258.1 (48.4%), dependencies 49.1 (9.2%), pointer arithmetic 18.9 (3.5%)",
+        "stats: sca: flow hot function #1: TrbCh_OffsLrn_Proc_10ms (<NORM>/045db496.c:249) 5681 reaching pairs, 1761 definitions (74 by calls), 1971 uses, 857 blocks",
+        "stats: sca: flow hot function #2: TrbCh_PosnCtrl_Proc_Diag_10ms (<NORM>/94f5f5e5.c:3440) 4194 reaching pairs, 1610 definitions (31 by calls), 1564 uses, 713 blocks",
+        "stats: sca: flow hot function #3: ExhMod_TMdl_Proc_50ms (<NORM>/85a65175.c:1980) 3827 reaching pairs, 983 definitions (155 by calls), 2391 uses, 363 blocks",
+        "stats: sca: flow hot function #4: rba_IoSigRtc_Prv_CounterDiag (<NORM>/5e58e2da.c:194) 3502 reaching pairs, 215 definitions (76 by calls), 289 uses, 148 blocks",
+        "stats: sca: flow hot function #5: mcop_MsgRcvOS_10ms_Task_Proc (<NORM>/b580f0e9.c:134156) 3488 reaching pairs, 6598 definitions (12 by calls), 3332 uses, 81 blocks",
+        "stats: sca: flow hot function #6: MoFDrDem_Co_Proc (<NORM>/6f6a5b14.c:452) 3390 reaching pairs, 953 definitions (223 by calls), 1544 uses, 395 blocks",
+        "stats: sca: flow hot function #7: TrbCh_PosnCtrl_Proc_Ctrl_1ms (<NORM>/94f5f5e5.c:223) 2823 reaching pairs, 1532 definitions (14 by calls), 1918 uses, 303 blocks",
+        "stats: sca: flow hot function #8: rba_IoExtFscSrv_P0_D0_SetupSpiEb (<NORM>/ab9f05dd.c:1734) 2800 reaching pairs, 286 definitions (130 by calls), 128 uses, 191 blocks",
+        "stats: sca: flow hot function #9: rba_IoExtFscSrv_P0_D1_SetupSpiEb (<NORM>/ab9f05dd.c:2844) 2800 reaching pairs, 286 definitions (130 by calls), 128 uses, 191 blocks",
+        "stats: sca: flow hot function #10: CILCN_Adap_Proc_SyncS0 (<NORM>/84340e8d.c:1076) 2408 reaching pairs, 743 definitions (62 by calls), 1297 uses, 349 blocks",
+        "stats: sca: flow speed: 7.5 Mexprs/s per thread"
+      ]
+    },
+    {
+      "index": 15,
+      "type": "get_filesize",
+      "label": "size_dump_flow_c1b",
+      "status": "ok",
+      "path": "<work>/out",
+      "files": 4621,
+      "bytes": 365430775,
+      "patterns": [
+        "*.ast.txt"
+      ],
+      "manifest_bytes": null,
+      "total_bytes": 365430775
+    },
+    {
+      "index": 16,
+      "type": "compare",
+      "label": "cmp_dump_flow",
+      "status": "ok",
+      "a": "<work>/out_dump_flow",
+      "b": "<work>/out",
+      "dir": true,
+      "files_a": 4621,
+      "files_b": 4621,
+      "size_a": 365430775,
+      "size_b": 365430775,
+      "differing": 0,
+      "only_a": [],
+      "only_b": [],
+      "n_only_a": 0,
+      "n_only_b": 0,
+      "diff_files": [],
+      "equal": true,
+      "verdict": "equal"
+    },
+    {
+      "index": 17,
+      "type": "remove",
+      "label": "remove17",
+      "status": "ok",
+      "paths": [
+        "<work>/out"
+      ]
+    },
+    {
+      "index": 18,
+      "type": "run",
+      "label": "dump_flow_threads",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=4",
+        "--prune",
+        "--no-resolve-warnings",
+        "--flow",
+        "--dump-ast",
+        "--stats"
+      ],
+      "seconds": 24.39212309999857,
+      "rc": 0,
+      "output": [
+        "stats: sca: cfg (control flow graph, in the result callback): 53.8 thread ms (0.8% of the analysis, 0.1% of stage b process), rest of the callback 5699.6 ms",
+        "stats: sca: cfg: 31728 function graphs, 258830 blocks, 287819 edges, 378872 items, 9 unreachable blocks (0.0%), 6 no-return calls",
+        "stats: sca: cfg speed: 9.9 Mstmts/s per thread",
+        "stats: sca: access (variable access analysis, in the result callback): 80.7 thread ms (1.2% of the analysis, 0.1% of stage b process), rest of the callback 5672.7 ms",
+        "stats: sca: access: 817731 records (553681 reads, 226294 writes, 52618 address-takes, 135568 indirect, 32825 pointer arithmetic), 268090 locations, 0 unresolved names",
+        "stats: sca: access speed: 49.4 Mexprs/s per thread",
+        "stats: sca: calls (call graph and function summaries, in the result callback): 95.2 thread ms (1.4% of the analysis, 0.1% of stage b process), rest of the callback 5658.2 ms",
+        "stats: sca: calls: 52608 functions (31728 defined), 92922 call sites (90791 direct, 1072 indirect, 1059 builtin; 46982 reach code without a definition), 51517 edges, 2891 address-taken functions",
+        "stats: sca: calls speed: 1.0 Mcallsites/s per thread",
+        "stats: sca: flow (dataflow, alias and dependency analysis, in the result callback): 307.6 thread ms (4.6% of the analysis, 0.4% of stage b process), rest of the callback 5445.8 ms",
+        "stats: sca: flow parts (thread ms): points-to 107.5 (34.9%), def-use 150.8 (49.0%), dependencies 29.5 (9.6%), pointer arithmetic 9.3 (3.0%)",
+        "stats: sca: flow hot function #1: TrbCh_OffsLrn_Proc_10ms (<NORM>/045db496.c:249) 5681 reaching pairs, 1761 definitions (74 by calls), 1971 uses, 857 blocks",
+        "stats: sca: flow hot function #2: TrbCh_PosnCtrl_Proc_Diag_10ms (<NORM>/94f5f5e5.c:3440) 4194 reaching pairs, 1610 definitions (31 by calls), 1564 uses, 713 blocks",
+        "stats: sca: flow hot function #3: ExhMod_TMdl_Proc_50ms (<NORM>/85a65175.c:1980) 3827 reaching pairs, 983 definitions (155 by calls), 2391 uses, 363 blocks",
+        "stats: sca: flow hot function #4: rba_IoSigRtc_Prv_CounterDiag (<NORM>/5e58e2da.c:194) 3502 reaching pairs, 215 definitions (76 by calls), 289 uses, 148 blocks",
+        "stats: sca: flow hot function #5: mcop_MsgRcvOS_10ms_Task_Proc (<NORM>/b580f0e9.c:134156) 3488 reaching pairs, 6598 definitions (12 by calls), 3332 uses, 81 blocks",
+        "stats: sca: flow hot function #6: MoFDrDem_Co_Proc (<NORM>/6f6a5b14.c:452) 3390 reaching pairs, 953 definitions (223 by calls), 1544 uses, 395 blocks",
+        "stats: sca: flow hot function #7: TrbCh_PosnCtrl_Proc_Ctrl_1ms (<NORM>/94f5f5e5.c:223) 2823 reaching pairs, 1532 definitions (14 by calls), 1918 uses, 303 blocks",
+        "stats: sca: flow hot function #8: rba_IoExtFscSrv_P0_D0_SetupSpiEb (<NORM>/ab9f05dd.c:1734) 2800 reaching pairs, 286 definitions (130 by calls), 128 uses, 191 blocks",
+        "stats: sca: flow hot function #9: rba_IoExtFscSrv_P0_D1_SetupSpiEb (<NORM>/ab9f05dd.c:2844) 2800 reaching pairs, 286 definitions (130 by calls), 128 uses, 191 blocks",
+        "stats: sca: flow hot function #10: CILCN_Adap_Proc_SyncS0 (<NORM>/84340e8d.c:1076) 2408 reaching pairs, 743 definitions (62 by calls), 1297 uses, 349 blocks",
+        "stats: sca: flow speed: 13.0 Mexprs/s per thread"
+      ]
+    },
+    {
+      "index": 19,
+      "type": "get_filesize",
+      "label": "size_dump_flow_threads",
+      "status": "ok",
+      "path": "<work>/out",
+      "files": 4621,
+      "bytes": 365430775,
+      "patterns": [
+        "*.ast.txt"
+      ],
+      "manifest_bytes": null,
+      "total_bytes": 365430775
+    },
+    {
+      "index": 20,
+      "type": "compare",
+      "label": "cmp_dump_flow_threads",
+      "status": "ok",
+      "a": "<work>/out_dump_flow",
+      "b": "<work>/out",
+      "dir": true,
+      "files_a": 4621,
+      "files_b": 4621,
+      "size_a": 365430775,
+      "size_b": 365430775,
+      "differing": 0,
+      "only_a": [],
+      "only_b": [],
+      "n_only_a": 0,
+      "n_only_b": 0,
+      "diff_files": [],
+      "equal": true,
+      "verdict": "equal"
+    },
+    {
+      "index": 21,
+      "type": "remove",
+      "label": "remove21",
+      "status": "ok",
+      "paths": [
+        "<work>/out",
+        "<work>/out_dump_flow"
+      ]
+    },
+    {
+      "index": 22,
+      "type": "run",
+      "label": "link_dump",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=1",
+        "--prune",
+        "--no-resolve-warnings",
+        "--link",
+        "--stats",
+        "--link-dump=<work>/out/link.txt"
+      ],
+      "seconds": 68.04164040007163,
+      "rc": 0,
+      "output": [
+        "stats: link: 4621 TUs folded (0 failed in the preprocessor, 0 C++), 179184 symbols exported, 86088 entities (68089 external, 17999 internal), 179184 instances, 164700 declaration sites, 85213 defined; 0 compile groups",
+        "stats: link: findings: 0 multiple definition (0 unused, notes), 65 conflicting signature (20 weak), 842 undefined external, 0 tentative definitions, 0 script conflict, 0 extern conflict (notes)",
+        "stats: link: thread ms: export 56.9, fold 119.6 (0 shard locks were busy); freeze 134.5 ms (single thread)",
+        "stats: link: memory: exports 56.6 MiB folded in total, index 18.1 MiB (7021 paths, 2.0 MiB of names)"
+      ]
+    },
+    {
+      "index": 23,
+      "type": "get_filesize",
+      "label": "size_link",
+      "status": "ok",
+      "path": "<work>/out",
+      "files": 1,
+      "bytes": 32404200,
+      "patterns": [
+        "link.txt"
+      ],
+      "manifest_bytes": null,
+      "total_bytes": 32404200
+    },
+    {
+      "index": 24,
+      "type": "run",
+      "label": "link_c1b_dump",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=1",
+        "--prune",
+        "--no-resolve-warnings",
+        "--link-c1b",
+        "--stats",
+        "--link-dump=<work>/out/link_c1b.txt"
+      ],
+      "seconds": 68.3732535999734,
+      "rc": 0,
+      "output": [
+        "stats: link: 4621 TUs folded (0 failed in the preprocessor, 0 C++), 179184 symbols exported, 86088 entities (68089 external, 17999 internal), 179184 instances, 164700 declaration sites, 85213 defined; 0 compile groups",
+        "stats: link: findings: 0 multiple definition (0 unused, notes), 65 conflicting signature (20 weak), 842 undefined external, 0 tentative definitions, 0 script conflict, 0 extern conflict (notes)",
+        "stats: link: thread ms: export 60.9, fold 121.1 (0 shard locks were busy); freeze 190.1 ms (single thread)",
+        "stats: link: memory: exports 56.6 MiB folded in total, index 18.1 MiB (7021 paths, 2.0 MiB of names)"
+      ]
+    },
+    {
+      "index": 25,
+      "type": "compare",
+      "label": "cmp_link_c1b",
+      "status": "ok",
+      "a": "<work>/out/link.txt",
+      "b": "<work>/out/link_c1b.txt",
+      "size_a": 32404200,
+      "size_b": 32404200,
+      "diff_lines": 0,
+      "diffs": [],
+      "equal": true,
+      "lines_a": null,
+      "lines_b": null,
+      "verdict": "equal"
+    },
+    {
+      "index": 26,
+      "type": "run",
+      "label": "link_dump_t16",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=16",
+        "--prune",
+        "--no-resolve-warnings",
+        "--link",
+        "--link-dump=<work>/out/link_t16.txt"
+      ],
+      "seconds": 11.862045699963346,
+      "rc": 0
+    },
+    {
+      "index": 27,
+      "type": "compare",
+      "label": "cmp_link_threads",
+      "status": "ok",
+      "a": "<work>/out/link.txt",
+      "b": "<work>/out/link_t16.txt",
+      "size_a": 32404200,
+      "size_b": 32404200,
+      "diff_lines": 0,
+      "diffs": [],
+      "equal": true,
+      "lines_a": null,
+      "lines_b": null,
+      "verdict": "equal"
+    },
+    {
+      "index": 28,
+      "type": "run",
+      "label": "link_calls_dump",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=1",
+        "--prune",
+        "--no-resolve-warnings",
+        "--link-calls",
+        "--stats",
+        "--link-dump=<work>/out/link_calls.txt"
+      ],
+      "seconds": 70.47107779991347,
+      "rc": 0,
+      "output": [
+        "stats: link: 4621 TUs folded (0 failed in the preprocessor, 0 C++), 179184 symbols exported, 86088 entities (68089 external, 17999 internal), 179184 instances, 164700 declaration sites, 85213 defined; 0 compile groups",
+        "stats: link: findings: 0 multiple definition (0 unused, notes), 65 conflicting signature (20 weak), 842 undefined external, 0 tentative definitions, 0 script conflict, 0 extern conflict (notes)",
+        "stats: link: calls: 51299 edges exported, 45992 distinct edges between entities (0 calls dropped: callee has no top-level declaration); 2879 functions with their address taken; 0 named roots (main, --link-root=), 2879 roots in all; 6748 functions with a body reached, 15333 not reached (no named root with a body: reachability not applied); 5 recursion groups (9 functions, largest 2); 0 multiple definitions reported as notes because no root reaches them",
+        "stats: link: summaries: 22081 function summaries (4757 without side effects, 5420 call something unknown in the project, 10108 said so in their own TU, 5902 of these are cleared by a definition in another TU); 143674 own global accesses (245 without a top-level declaration); 752 indirect call records in 221 function types, 14554 (caller, target) pairs, 93 with no address-taken target in the project, 6 with a target that has no body; 14 fixpoint sweeps",
+        "stats: link: summaries: params: 34394 parameters, 10999 with memory read or written through them (7707 by the function itself, 2092 only through a callee in another TU), 133 passed on to code outside the project, 3624 per-TU escapes cleared by a definition in another TU; 29879 argument roots exported",
+        "stats: link: indirect: largest target set 983, 0 unprototyped called types give 0 of 14554 pairs, 59 called types with no target",
+        "stats: link: indirect: keys: 609 (caller, called type) records matched by pointer key (61 with only null pointers stored, 0 through a record no object has), 93 with a key that falls back to the type, 0 without a key; 14554 pairs against 53511 by type alone; address-taken functions: 2883 only stored under keys, 3 untraced (targets of every call of their type)",
+        "stats: link: indirect: fallback: 92 records with an open key, 1 with nothing stored under the key; 154 open keys (by the smallest store: 7 pointer without a key, 18 not a function pointer, 0 fixed address, 95 call result or expression, 34 parameter with unseen callers); untraced functions by first use: 0 argument, 0 stored without a key, 0 compared, 3 other use, 0 no use seen",
+        "stats: link: indirect: params: 180 parameter keys, 44 links from calls through a pointer, 34 opened (callers not all in the project), 0 functions untraced because an argument reaches no body",
+        "stats: link: indirect: top: 521 targets x 6 callers = 3126 pairs, first target Com_RxTONotify_AC_COOLING_STS_Rx",
+        "stats: link: indirect: top:   records: 0 by key, 6 open key, 0 nothing stored, 0 no key; 3 untraced targets; first open store <NORM>/e32b5ddf.c:41:1 (parameter with unseen callers); first untraced Core1_main at <NORM>/2045016c.c:503:24 (other use)",
+        "stats: link: indirect: top: 983 targets x 2 callers = 1966 pairs (by pointer key), first target DcmDspDidRange_CarbModes_ReadData_IT08",
+        "stats: link: indirect: top:   records: 2 by key, 0 open key, 0 nothing stored, 0 no key; 0 untraced targets",
+        "stats: link: indirect: top: 983 targets x 1 callers = 983 pairs (by pointer key), first target DcmDspDidRange_CarbModes_ReadData_IT08",
+        "stats: link: indirect: top:   records: 1 by key, 0 open key, 0 nothing stored, 0 no key; 0 untraced targets",
+        "stats: link: indirect: top: 983 targets x 1 callers = 983 pairs (by pointer key), first target DcmDspDidRange_CarbModes_ReadData_IT08",
+        "stats: link: indirect: top:   records: 1 by key, 0 open key, 0 nothing stored, 0 no key; 0 untraced targets",
+        "stats: link: indirect: top: 983 targets x 1 callers = 983 pairs (by pointer key), first target DcmDspDidRange_CarbModes_ReadData_IT08",
+        "stats: link: indirect: top:   records: 1 by key, 0 open key, 0 nothing stored, 0 no key; 0 untraced targets",
+        "stats: link: thread ms: export 189.9, fold 163.6 (0 shard locks were busy); freeze 176.7 ms (single thread)",
+        "stats: link: memory: exports 62.4 MiB folded in total, index 18.1 MiB (7021 paths, 2.0 MiB of names)"
+      ]
+    },
+    {
+      "index": 29,
+      "type": "get_filesize",
+      "label": "size_link_calls",
+      "status": "ok",
+      "path": "<work>/out",
+      "files": 1,
+      "bytes": 42161304,
+      "patterns": [
+        "link_calls.txt"
+      ],
+      "manifest_bytes": null,
+      "total_bytes": 42161304
+    },
+    {
+      "index": 30,
+      "type": "run",
+      "label": "link_calls_c1b_dump",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=1",
+        "--prune",
+        "--no-resolve-warnings",
+        "--link-calls",
+        "--link-c1b",
+        "--link-dump=<work>/out/link_calls_c1b.txt"
+      ],
+      "seconds": 100.72960950003471,
+      "rc": 0
+    },
+    {
+      "index": 31,
+      "type": "compare",
+      "label": "cmp_link_calls_c1b",
+      "status": "ok",
+      "a": "<work>/out/link_calls.txt",
+      "b": "<work>/out/link_calls_c1b.txt",
+      "size_a": 42161304,
+      "size_b": 42161304,
+      "diff_lines": 0,
+      "diffs": [],
+      "equal": true,
+      "lines_a": null,
+      "lines_b": null,
+      "verdict": "equal"
+    },
+    {
+      "index": 32,
+      "type": "run",
+      "label": "link_calls_dump_t16",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=16",
+        "--prune",
+        "--no-resolve-warnings",
+        "--link-calls",
+        "--link-dump=<work>/out/link_calls_t16.txt"
+      ],
+      "seconds": 12.174667700077407,
+      "rc": 0
+    },
+    {
+      "index": 33,
+      "type": "compare",
+      "label": "cmp_link_calls_threads",
+      "status": "ok",
+      "a": "<work>/out/link_calls.txt",
+      "b": "<work>/out/link_calls_t16.txt",
+      "size_a": 42161304,
+      "size_b": 42161304,
+      "diff_lines": 0,
+      "diffs": [],
+      "equal": true,
+      "lines_a": null,
+      "lines_b": null,
+      "verdict": "equal"
+    },
+    {
+      "index": 34,
+      "type": "run",
+      "label": "link_uses_dump",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=1",
+        "--prune",
+        "--no-resolve-warnings",
+        "--link-uses",
+        "--link-dump=<work>/out/link_uses.txt"
+      ],
+      "seconds": 68.87985310005024,
+      "rc": 0
+    },
+    {
+      "index": 35,
+      "type": "get_filesize",
+      "label": "size_link_uses",
+      "status": "ok",
+      "path": "<work>/out",
+      "files": 1,
+      "bytes": 67535245,
+      "patterns": [
+        "link_uses.txt"
+      ],
+      "manifest_bytes": null,
+      "total_bytes": 67535245
+    },
+    {
+      "index": 36,
+      "type": "run",
+      "label": "link_uses_dump_t16",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=16",
+        "--prune",
+        "--no-resolve-warnings",
+        "--link-uses",
+        "--link-dump=<work>/out/link_uses_t16.txt"
+      ],
+      "seconds": 12.079711599973962,
+      "rc": 0
+    },
+    {
+      "index": 37,
+      "type": "compare",
+      "label": "cmp_link_uses_threads",
+      "status": "ok",
+      "a": "<work>/out/link_uses.txt",
+      "b": "<work>/out/link_uses_t16.txt",
+      "size_a": 67535245,
+      "size_b": 67535245,
+      "diff_lines": 0,
+      "diffs": [],
+      "equal": true,
+      "lines_a": null,
+      "lines_b": null,
+      "verdict": "equal"
+    },
+    {
+      "index": 38,
+      "type": "run",
+      "label": "link_db_dump",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "<NORM>",
+        "--out-dir=<work>/out",
+        "--cache-dir=<work>/cache",
+        "--quiet",
+        "--executor-threads=16",
+        "--prune",
+        "--no-resolve-warnings",
+        "--link-calls",
+        "--link-db=<work>/out/link.db",
+        "--link-dump=<work>/out/link_db_run.txt"
+      ],
+      "seconds": 12.006573199993,
+      "rc": 0
+    },
+    {
+      "index": 39,
+      "type": "get_filesize",
+      "label": "size_link_db",
+      "status": "ok",
+      "path": "<work>/out",
+      "files": 1,
+      "bytes": 18432058,
+      "patterns": [
+        "link.db"
+      ],
+      "manifest_bytes": null,
+      "total_bytes": 18432058
+    },
+    {
+      "index": 40,
+      "type": "run",
+      "label": "from_db_dump",
+      "status": "ok",
+      "command": [
+        "<repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe",
+        "--from-db=<work>/out/link.db",
+        "--stats",
+        "--link-dump=<work>/out/link_db_read.txt"
+      ],
+      "seconds": 0.47672379994764924,
+      "rc": 0,
+      "output": [
+        "cxxp-sca-proj: database '<work>/out/link.db' (format 1, 0.1.0, options: prune=1 calls=1 uses=0 c1b=0 max_instances=5000 max_template=64 max_depth=32 max_nodes=2000000 max_member_instances=1024): 4621 records, 0 replaced, 4621 TUs, 0 scripts, 0 extern lists, 0 failed sources",
+        "stats: link: db: 4621 records read (0 replaced), 18432058 bytes, read + fold 102.4 ms, freeze 137.4 ms"
+      ]
+    },
+    {
+      "index": 41,
+      "type": "compare",
+      "label": "cmp_link_db",
+      "status": "ok",
+      "a": "<work>/out/link_db_run.txt",
+      "b": "<work>/out/link_db_read.txt",
+      "size_a": 42161304,
+      "size_b": 42161304,
+      "diff_lines": 0,
+      "diffs": [],
+      "equal": true,
+      "lines_a": null,
+      "lines_b": null,
+      "verdict": "equal"
+    },
+    {
+      "index": 42,
+      "type": "compare",
+      "label": "cmp_link_db_calls",
+      "status": "ok",
+      "a": "<work>/out/link_calls.txt",
+      "b": "<work>/out/link_db_read.txt",
+      "size_a": 42161304,
+      "size_b": 42161304,
+      "diff_lines": 0,
+      "diffs": [],
+      "equal": true,
+      "lines_a": null,
+      "lines_b": null,
+      "verdict": "equal"
+    },
+    {
+      "index": 43,
+      "type": "remove",
+      "label": "remove43",
+      "status": "ok",
+      "paths": [
+        "<work>/out"
+      ]
+    }
+  ]
+}

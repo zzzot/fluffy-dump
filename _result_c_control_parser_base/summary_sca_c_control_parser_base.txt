@@ -1,0 +1,10 @@
+cxxp measurement summary: sca_c_control_parser_base
+compare: result of a file comparison ('-' = a file is missing)
+
+step                  BIG                 MID                 NORM
+--------------------  ------------------  ------------------  ------------------
+cmp_dump_calls        equal               equal               equal
+cmp_call_stats        DIFFERENT (failed)  DIFFERENT (failed)  DIFFERENT (failed)
+cmp_decl_diagnostics  -                   -                   -
+cmp_body_diagnostics  -                   -                   -
+cmp_link_calls        -                   -                   -

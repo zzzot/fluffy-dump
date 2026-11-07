@@ -1,0 +1,340 @@
+cxxp measurement report
+=======================
+name       : sca_c_control
+config     : sca_c_control.json (sha256 9f5b74fce865)
+project    : BIG
+started    : 2026-11-07 09:16:42
+python     : 3.12.12
+platform   : Windows-11-10.0.26200-SP0, 24 logical CPUs
+obscured   : yes
+result     : all steps ok
+
+[1] run: version_sca  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe --version
+    exit code 0, 0.16 s
+    output:
+      cxxp-sca-proj 0.1.0
+      allocator: mimalloc 2.5.2 (operator new: yes, malloc: NO)
+
+[2] run: dump_calls  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=16 --prune --no-resolve-warnings --calls --dump-ast --stats
+    exit code 0, 56.84 s
+    output:
+      stats: sca: sema (symbol and type resolution, in the result callback): 2091.0 thread ms (6.0% of the analysis, 0.3% of stage b process), rest of the callback 28351.4 ms
+      stats: sca: sema: 5492988 symbols, 1054628 resolved types, 1843859 identifiers (0 unresolved, 0.0%), 575039 member accesses (0 unresolved), 7594426 typed expressions (804 without a type), 0 diagnostics
+      stats: sca: sema speed: 6.3 Mnodes/s per thread (declarations + expressions)
+      stats: sca: cfg (control flow graph, in the result callback): 236.8 thread ms (0.7% of the analysis, 0.0% of stage b process), rest of the callback 30205.6 ms
+      stats: sca: cfg: 68764 function graphs, 673554 blocks, 783040 edges, 1015686 items, 20 unreachable blocks (0.0%), 8 no-return calls
+      stats: sca: cfg speed: 5.9 Mstmts/s per thread
+      stats: sca: access (variable access analysis, in the result callback): 364.2 thread ms (1.0% of the analysis, 0.1% of stage b process), rest of the callback 30078.2 ms
+      stats: sca: access: 1868543 records (1070393 reads, 648777 writes, 175636 address-takes, 183610 indirect, 61233 pointer arithmetic), 657187 locations, 0 unresolved names
+      stats: sca: access speed: 20.9 Mexprs/s per thread
+      stats: sca: calls (call graph and function summaries, in the result callback): 352.0 thread ms (1.0% of the analysis, 0.1% of stage b process), rest of the callback 30090.4 ms
+      stats: sca: calls: 124345 functions (68764 defined), 186431 call sites (184254 direct, 1373 indirect, 804 builtin; 114699 reach code without a definition), 107102 edges, 10517 address-taken functions
+      stats: sca: recursion: 38 recursive functions in 22 cycles (4 call themselves), 124329 components in all
+      stats: sca: summaries: 24269 leaf functions, 14113 without side effects, 46374 without a caller in the TU, 11 inferred no-return
+      stats: sca: calls speed: 0.5 Mcallsites/s per thread
+
+[3] get_filesize: size_dump_calls  --  OK
+    8999 files (*.ast.txt): 1082235346 bytes (1032.10 MiB)
+    manifest: not found
+    total: 1082235346 bytes (1032.10 MiB)
+
+[4] run: dump_access  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=16 --prune --no-resolve-warnings --access --dump-ast --stats
+    exit code 0, 45.74 s
+    output:
+      stats: sca: sema (symbol and type resolution, in the result callback): 2053.2 thread ms (5.4% of the analysis, 0.3% of stage b process), rest of the callback 31360.9 ms
+      stats: sca: sema: 5492988 symbols, 1054628 resolved types, 1843859 identifiers (0 unresolved, 0.0%), 575039 member accesses (0 unresolved), 7594426 typed expressions (804 without a type), 0 diagnostics
+      stats: sca: sema speed: 6.4 Mnodes/s per thread (declarations + expressions)
+      stats: sca: cfg (control flow graph, in the result callback): 233.9 thread ms (0.6% of the analysis, 0.0% of stage b process), rest of the callback 33180.2 ms
+      stats: sca: cfg: 68764 function graphs, 673554 blocks, 783040 edges, 1015686 items, 20 unreachable blocks (0.0%), 8 no-return calls
+      stats: sca: cfg speed: 6.0 Mstmts/s per thread
+      stats: sca: access (variable access analysis, in the result callback): 373.5 thread ms (1.0% of the analysis, 0.1% of stage b process), rest of the callback 33040.6 ms
+      stats: sca: access: 1868543 records (1070393 reads, 648777 writes, 175636 address-takes, 183610 indirect, 61233 pointer arithmetic), 657187 locations, 0 unresolved names
+      stats: sca: access speed: 20.3 Mexprs/s per thread
+
+[5] get_filesize: size_dump_access  --  OK
+    8999 files (*.ast.txt): 1031445754 bytes (983.66 MiB)
+    manifest: not found
+    total: 1031445754 bytes (983.66 MiB)
+
+[6] rename: rename6  --  OK
+    <work>/out -> <work>/out_dump_access
+
+[7] run: dump_access_c1b  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=16 --prune --no-resolve-warnings --cfg-c1b --access-c1b --dump-ast --stats
+    exit code 0, 46.46 s
+    output:
+      stats: sca: sema (symbol and type resolution, in the result callback): 2019.5 thread ms (4.3% of the analysis, 0.3% of stage b process), rest of the callback 40235.6 ms
+      stats: sca: sema: 5492988 symbols, 1054628 resolved types, 1843859 identifiers (0 unresolved, 0.0%), 575039 member accesses (0 unresolved), 7594426 typed expressions (804 without a type), 0 diagnostics
+      stats: sca: sema speed: 6.5 Mnodes/s per thread (declarations + expressions)
+      stats: sca: cfg (control flow graph, in the result callback): 250.5 thread ms (0.5% of the analysis, 0.0% of stage b process), rest of the callback 42004.6 ms
+      stats: sca: cfg: 68764 function graphs, 673554 blocks, 783040 edges, 1015686 items, 20 unreachable blocks (0.0%), 8 no-return calls
+      stats: sca: cfg speed: 5.6 Mstmts/s per thread
+      stats: sca: access (variable access analysis, in the result callback): 364.6 thread ms (0.8% of the analysis, 0.1% of stage b process), rest of the callback 41890.5 ms
+      stats: sca: access: 1868543 records (1070393 reads, 648777 writes, 175636 address-takes, 183610 indirect, 61233 pointer arithmetic), 657187 locations, 0 unresolved names
+      stats: sca: access speed: 20.8 Mexprs/s per thread
+
+[8] get_filesize: size_dump_access_c1b  --  OK
+    8999 files (*.ast.txt): 1031445754 bytes (983.66 MiB)
+    manifest: not found
+    total: 1031445754 bytes (983.66 MiB)
+
+[9] compare: cmp_dump_access  --  OK
+    a: <work>/out_dump_access (8999 files, 1031445754 bytes (983.66 MiB))
+    b: <work>/out (8999 files, 1031445754 bytes (983.66 MiB))
+    result: EQUAL (8999 files byte-identical)
+
+[10] remove: remove10  --  OK
+    removed <work>/out
+    removed <work>/out_dump_access
+
+[11] run: dump_flow  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=16 --prune --no-resolve-warnings --flow --dump-ast --stats
+    exit code 0, 48.88 s
+    output:
+      stats: sca: cfg (control flow graph, in the result callback): 232.9 thread ms (0.2% of the analysis, 0.0% of stage b process), rest of the callback 95765.0 ms
+      stats: sca: cfg: 68764 function graphs, 673554 blocks, 783040 edges, 1015686 items, 20 unreachable blocks (0.0%), 8 no-return calls
+      stats: sca: cfg speed: 6.0 Mstmts/s per thread
+      stats: sca: access (variable access analysis, in the result callback): 357.5 thread ms (0.4% of the analysis, 0.1% of stage b process), rest of the callback 95640.4 ms
+      stats: sca: access: 1868543 records (1070393 reads, 648777 writes, 175636 address-takes, 183610 indirect, 61233 pointer arithmetic), 657187 locations, 0 unresolved names
+      stats: sca: access speed: 21.2 Mexprs/s per thread
+      stats: sca: calls (call graph and function summaries, in the result callback): 346.1 thread ms (0.3% of the analysis, 0.1% of stage b process), rest of the callback 95651.8 ms
+      stats: sca: calls: 124345 functions (68764 defined), 186431 call sites (184254 direct, 1373 indirect, 804 builtin; 114699 reach code without a definition), 107102 edges, 10517 address-taken functions
+      stats: sca: calls speed: 0.5 Mcallsites/s per thread
+      stats: sca: flow (dataflow, alias and dependency analysis, in the result callback): 1344.8 thread ms (1.3% of the analysis, 0.2% of stage b process), rest of the callback 94653.1 ms
+      stats: sca: flow parts (thread ms): points-to 460.0 (34.2%), def-use 693.1 (51.5%), dependencies 104.9 (7.8%), pointer arithmetic 42.2 (3.1%)
+      stats: sca: flow hot function #1: Rte_task_BMW_EOC_MP_10ms_EcucPartition_Asw1App_0 (<BIG>/18b3885c.c:12634) 1552352 reaching pairs, 20904 definitions (692 by calls), 11237 uses, 1635 blocks
+      stats: sca: flow hot function #2: Rte_task_BMW_EOC_MP_100ms_EcucPartition_Asw1App_0 (<BIG>/7b44d69d.c:4622) 359699 reaching pairs, 6381 definitions (617 by calls), 3398 uses, 643 blocks
+      stats: sca: flow hot function #3: Rte_task_BMW_EOC_BSA_10ms_EcucPartition_Asw0App_0 (<BIG>/6b08bb55.c:7185) 351271 reaching pairs, 11951 definitions (262 by calls), 5987 uses, 11 blocks
+      stats: sca: flow hot function #4: Rte_task_BMW_EOC_segsync_EcucPartition_Asw2App_0 (<BIG>/c0da73e2.c:2247) 139358 reaching pairs, 2932 definitions (748 by calls), 1141 uses, 19 blocks
+      stats: sca: flow hot function #5: Rte_task_BMW_EOC_BSA_100ms_EcucPartition_Asw0App_0 (<BIG>/538b901d.c:1767) 51778 reaching pairs, 2494 definitions (228 by calls), 1155 uses, 3 blocks
+      stats: sca: flow hot function #6: Rte_task_BMW_EOC_MP_200ms_EcucPartition_Asw1App_0 (<BIG>/053cb57c.c:1104) 34102 reaching pairs, 1397 definitions (763 by calls), 473 uses, 235 blocks
+      stats: sca: flow hot function #7: Rte_task_BMW_EOC_WM_200ms_EcucPartition_Asw0App_0 (<BIG>/0beae550.c:1671) 25774 reaching pairs, 2596 definitions (50 by calls), 1493 uses, 323 blocks
+      stats: sca: flow hot function #8: Rte_task_BMW_EOC_OIL_100ms_EcucPartition_Asw0App_0 (<BIG>/ed8dd31d.c:1094) 21474 reaching pairs, 1609 definitions (133 by calls), 815 uses, 121 blocks
+      stats: sca: flow hot function #9: BMW_MOD_EsaIn_10ms (<BIG>/67598083.c:1149) 19705 reaching pairs, 1596 definitions (6 by calls), 1205 uses, 800 blocks
+      stats: sca: flow hot function #10: Rte_task_BMW_EOC_BSA_20ms_EcucPartition_Asw0App_0 (<BIG>/e22ac2fd.c:1143) 17290 reaching pairs, 1687 definitions (131 by calls), 780 uses, 3 blocks
+      stats: sca: flow speed: 5.6 Mexprs/s per thread
+
+[12] get_filesize: size_dump_flow  --  OK
+    8999 files (*.ast.txt): 1494123848 bytes (1424.91 MiB)
+    manifest: not found
+    total: 1494123848 bytes (1424.91 MiB)
+
+[13] rename: rename13  --  OK
+    <work>/out -> <work>/out_dump_flow
+
+[14] run: dump_flow_c1b  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=16 --prune --no-resolve-warnings --flow-c1b --dump-ast --stats
+    exit code 0, 47.96 s
+    output:
+      stats: sca: cfg (control flow graph, in the result callback): 229.6 thread ms (0.3% of the analysis, 0.0% of stage b process), rest of the callback 74210.7 ms
+      stats: sca: cfg: 68764 function graphs, 673554 blocks, 783040 edges, 1015686 items, 20 unreachable blocks (0.0%), 8 no-return calls
+      stats: sca: cfg speed: 6.1 Mstmts/s per thread
+      stats: sca: access (variable access analysis, in the result callback): 357.3 thread ms (0.5% of the analysis, 0.1% of stage b process), rest of the callback 74082.9 ms
+      stats: sca: access: 1868543 records (1070393 reads, 648777 writes, 175636 address-takes, 183610 indirect, 61233 pointer arithmetic), 657187 locations, 0 unresolved names
+      stats: sca: access speed: 21.3 Mexprs/s per thread
+      stats: sca: calls (call graph and function summaries, in the result callback): 361.9 thread ms (0.5% of the analysis, 0.1% of stage b process), rest of the callback 74078.4 ms
+      stats: sca: calls: 124345 functions (68764 defined), 186431 call sites (184254 direct, 1373 indirect, 804 builtin; 114699 reach code without a definition), 107102 edges, 10517 address-taken functions
+      stats: sca: calls speed: 0.5 Mcallsites/s per thread
+      stats: sca: flow (dataflow, alias and dependency analysis, in the result callback): 1482.5 thread ms (1.9% of the analysis, 0.2% of stage b process), rest of the callback 72957.7 ms
+      stats: sca: flow parts (thread ms): points-to 506.4 (34.2%), def-use 757.9 (51.1%), dependencies 112.8 (7.6%), pointer arithmetic 43.2 (2.9%)
+      stats: sca: flow hot function #1: Rte_task_BMW_EOC_MP_10ms_EcucPartition_Asw1App_0 (<BIG>/18b3885c.c:12634) 1552352 reaching pairs, 20904 definitions (692 by calls), 11237 uses, 1635 blocks
+      stats: sca: flow hot function #2: Rte_task_BMW_EOC_MP_100ms_EcucPartition_Asw1App_0 (<BIG>/7b44d69d.c:4622) 359699 reaching pairs, 6381 definitions (617 by calls), 3398 uses, 643 blocks
+      stats: sca: flow hot function #3: Rte_task_BMW_EOC_BSA_10ms_EcucPartition_Asw0App_0 (<BIG>/6b08bb55.c:7185) 351271 reaching pairs, 11951 definitions (262 by calls), 5987 uses, 11 blocks
+      stats: sca: flow hot function #4: Rte_task_BMW_EOC_segsync_EcucPartition_Asw2App_0 (<BIG>/c0da73e2.c:2247) 139358 reaching pairs, 2932 definitions (748 by calls), 1141 uses, 19 blocks
+      stats: sca: flow hot function #5: Rte_task_BMW_EOC_BSA_100ms_EcucPartition_Asw0App_0 (<BIG>/538b901d.c:1767) 51778 reaching pairs, 2494 definitions (228 by calls), 1155 uses, 3 blocks
+      stats: sca: flow hot function #6: Rte_task_BMW_EOC_MP_200ms_EcucPartition_Asw1App_0 (<BIG>/053cb57c.c:1104) 34102 reaching pairs, 1397 definitions (763 by calls), 473 uses, 235 blocks
+      stats: sca: flow hot function #7: Rte_task_BMW_EOC_WM_200ms_EcucPartition_Asw0App_0 (<BIG>/0beae550.c:1671) 25774 reaching pairs, 2596 definitions (50 by calls), 1493 uses, 323 blocks
+      stats: sca: flow hot function #8: Rte_task_BMW_EOC_OIL_100ms_EcucPartition_Asw0App_0 (<BIG>/ed8dd31d.c:1094) 21474 reaching pairs, 1609 definitions (133 by calls), 815 uses, 121 blocks
+      stats: sca: flow hot function #9: BMW_MOD_EsaIn_10ms (<BIG>/67598083.c:1149) 19705 reaching pairs, 1596 definitions (6 by calls), 1205 uses, 800 blocks
+      stats: sca: flow hot function #10: Rte_task_BMW_EOC_BSA_20ms_EcucPartition_Asw0App_0 (<BIG>/e22ac2fd.c:1143) 17290 reaching pairs, 1687 definitions (131 by calls), 780 uses, 3 blocks
+      stats: sca: flow speed: 5.1 Mexprs/s per thread
+
+[15] get_filesize: size_dump_flow_c1b  --  OK
+    8999 files (*.ast.txt): 1494123848 bytes (1424.91 MiB)
+    manifest: not found
+    total: 1494123848 bytes (1424.91 MiB)
+
+[16] compare: cmp_dump_flow  --  OK
+    a: <work>/out_dump_flow (8999 files, 1494123848 bytes (1424.91 MiB))
+    b: <work>/out (8999 files, 1494123848 bytes (1424.91 MiB))
+    result: EQUAL (8999 files byte-identical)
+
+[17] remove: remove17  --  OK
+    removed <work>/out
+
+[18] run: dump_flow_threads  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=4 --prune --no-resolve-warnings --flow --dump-ast --stats
+    exit code 0, 80.28 s
+    output:
+      stats: sca: cfg (control flow graph, in the result callback): 125.6 thread ms (0.6% of the analysis, 0.0% of stage b process), rest of the callback 18901.9 ms
+      stats: sca: cfg: 68764 function graphs, 673554 blocks, 783040 edges, 1015686 items, 20 unreachable blocks (0.0%), 8 no-return calls
+      stats: sca: cfg speed: 11.2 Mstmts/s per thread
+      stats: sca: access (variable access analysis, in the result callback): 178.9 thread ms (0.8% of the analysis, 0.1% of stage b process), rest of the callback 18848.6 ms
+      stats: sca: access: 1868543 records (1070393 reads, 648777 writes, 175636 address-takes, 183610 indirect, 61233 pointer arithmetic), 657187 locations, 0 unresolved names
+      stats: sca: access speed: 42.5 Mexprs/s per thread
+      stats: sca: calls (call graph and function summaries, in the result callback): 191.6 thread ms (0.9% of the analysis, 0.1% of stage b process), rest of the callback 18835.9 ms
+      stats: sca: calls: 124345 functions (68764 defined), 186431 call sites (184254 direct, 1373 indirect, 804 builtin; 114699 reach code without a definition), 107102 edges, 10517 address-taken functions
+      stats: sca: calls speed: 1.0 Mcallsites/s per thread
+      stats: sca: flow (dataflow, alias and dependency analysis, in the result callback): 820.9 thread ms (3.8% of the analysis, 0.3% of stage b process), rest of the callback 18206.6 ms
+      stats: sca: flow parts (thread ms): points-to 282.5 (34.4%), def-use 424.4 (51.7%), dependencies 66.9 (8.2%), pointer arithmetic 21.5 (2.6%)
+      stats: sca: flow hot function #1: Rte_task_BMW_EOC_MP_10ms_EcucPartition_Asw1App_0 (<BIG>/18b3885c.c:12634) 1552352 reaching pairs, 20904 definitions (692 by calls), 11237 uses, 1635 blocks
+      stats: sca: flow hot function #2: Rte_task_BMW_EOC_MP_100ms_EcucPartition_Asw1App_0 (<BIG>/7b44d69d.c:4622) 359699 reaching pairs, 6381 definitions (617 by calls), 3398 uses, 643 blocks
+      stats: sca: flow hot function #3: Rte_task_BMW_EOC_BSA_10ms_EcucPartition_Asw0App_0 (<BIG>/6b08bb55.c:7185) 351271 reaching pairs, 11951 definitions (262 by calls), 5987 uses, 11 blocks
+      stats: sca: flow hot function #4: Rte_task_BMW_EOC_segsync_EcucPartition_Asw2App_0 (<BIG>/c0da73e2.c:2247) 139358 reaching pairs, 2932 definitions (748 by calls), 1141 uses, 19 blocks
+      stats: sca: flow hot function #5: Rte_task_BMW_EOC_BSA_100ms_EcucPartition_Asw0App_0 (<BIG>/538b901d.c:1767) 51778 reaching pairs, 2494 definitions (228 by calls), 1155 uses, 3 blocks
+      stats: sca: flow hot function #6: Rte_task_BMW_EOC_MP_200ms_EcucPartition_Asw1App_0 (<BIG>/053cb57c.c:1104) 34102 reaching pairs, 1397 definitions (763 by calls), 473 uses, 235 blocks
+      stats: sca: flow hot function #7: Rte_task_BMW_EOC_WM_200ms_EcucPartition_Asw0App_0 (<BIG>/0beae550.c:1671) 25774 reaching pairs, 2596 definitions (50 by calls), 1493 uses, 323 blocks
+      stats: sca: flow hot function #8: Rte_task_BMW_EOC_OIL_100ms_EcucPartition_Asw0App_0 (<BIG>/ed8dd31d.c:1094) 21474 reaching pairs, 1609 definitions (133 by calls), 815 uses, 121 blocks
+      stats: sca: flow hot function #9: BMW_MOD_EsaIn_10ms (<BIG>/67598083.c:1149) 19705 reaching pairs, 1596 definitions (6 by calls), 1205 uses, 800 blocks
+      stats: sca: flow hot function #10: Rte_task_BMW_EOC_BSA_20ms_EcucPartition_Asw0App_0 (<BIG>/e22ac2fd.c:1143) 17290 reaching pairs, 1687 definitions (131 by calls), 780 uses, 3 blocks
+      stats: sca: flow speed: 9.3 Mexprs/s per thread
+
+[19] get_filesize: size_dump_flow_threads  --  OK
+    8999 files (*.ast.txt): 1494123848 bytes (1424.91 MiB)
+    manifest: not found
+    total: 1494123848 bytes (1424.91 MiB)
+
+[20] compare: cmp_dump_flow_threads  --  OK
+    a: <work>/out_dump_flow (8999 files, 1494123848 bytes (1424.91 MiB))
+    b: <work>/out (8999 files, 1494123848 bytes (1424.91 MiB))
+    result: EQUAL (8999 files byte-identical)
+
+[21] remove: remove21  --  OK
+    removed <work>/out
+    removed <work>/out_dump_flow
+
+[22] run: link_dump  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=1 --prune --no-resolve-warnings --link --stats --link-dump=<work>/out/link.txt
+    exit code 0, 242.20 s
+    output:
+      stats: link: 8999 TUs folded (0 failed in the preprocessor, 0 C++), 381198 symbols exported, 212649 entities (192380 external, 20269 internal), 381198 instances, 425469 declaration sites, 196133 defined; 0 compile groups
+      stats: link: findings: 2 multiple definition (1 unused, notes), 1374 conflicting signature (1171 weak), 2698 undefined external, 103 tentative definitions, 0 script conflict, 0 extern conflict (notes)
+      stats: link: thread ms: export 127.0, fold 273.2 (0 shard locks were busy); freeze 403.3 ms (single thread)
+      stats: link: memory: exports 124.3 MiB folded in total, index 46.4 MiB (15116 paths, 7.5 MiB of names)
+
+[23] get_filesize: size_link  --  OK
+    1 files (link.txt): 83254699 bytes (79.40 MiB)
+    manifest: not found
+    total: 83254699 bytes (79.40 MiB)
+
+[24] run: link_c1b_dump  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=1 --prune --no-resolve-warnings --link-c1b --stats --link-dump=<work>/out/link_c1b.txt
+    exit code 0, 242.46 s
+    output:
+      stats: link: 8999 TUs folded (0 failed in the preprocessor, 0 C++), 381198 symbols exported, 212649 entities (192380 external, 20269 internal), 381198 instances, 425469 declaration sites, 196133 defined; 0 compile groups
+      stats: link: findings: 2 multiple definition (1 unused, notes), 1374 conflicting signature (1171 weak), 2698 undefined external, 103 tentative definitions, 0 script conflict, 0 extern conflict (notes)
+      stats: link: thread ms: export 127.4, fold 280.6 (0 shard locks were busy); freeze 390.0 ms (single thread)
+      stats: link: memory: exports 124.3 MiB folded in total, index 46.4 MiB (15116 paths, 7.5 MiB of names)
+
+[25] compare: cmp_link_c1b  --  OK
+    a: <work>/out/link.txt (83254699 bytes (79.40 MiB))
+    b: <work>/out/link_c1b.txt (83254699 bytes (79.40 MiB))
+    result: EQUAL
+
+[26] run: link_dump_t16  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=16 --prune --no-resolve-warnings --link --link-dump=<work>/out/link_t16.txt
+    exit code 0, 40.55 s
+
+[27] compare: cmp_link_threads  --  OK
+    a: <work>/out/link.txt (83254699 bytes (79.40 MiB))
+    b: <work>/out/link_t16.txt (83254699 bytes (79.40 MiB))
+    result: EQUAL
+
+[28] run: link_calls_dump  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=1 --prune --no-resolve-warnings --link-calls --stats --link-dump=<work>/out/link_calls.txt
+    exit code 0, 244.51 s
+    output:
+      stats: link: 8999 TUs folded (0 failed in the preprocessor, 0 C++), 381198 symbols exported, 212649 entities (192380 external, 20269 internal), 381198 instances, 425469 declaration sites, 196133 defined; 0 compile groups
+      stats: link: findings: 2 multiple definition (1 unused, notes), 1374 conflicting signature (1171 weak), 2698 undefined external, 103 tentative definitions, 0 script conflict, 0 extern conflict (notes)
+      stats: link: calls: 106555 edges exported, 100057 distinct edges between entities (0 calls dropped: callee has no top-level declaration); 10508 functions with their address taken; 0 named roots (main, --link-root=), 10508 roots in all; 21566 functions with a body reached, 36463 not reached (no named root with a body: reachability not applied); 11 recursion groups (48 functions, largest 23); 0 multiple definitions reported as notes because no root reaches them
+      stats: link: summaries: 58029 function summaries (11667 without side effects, 12506 call something unknown in the project, 30123 said so in their own TU, 18889 of these are cleared by a definition in another TU); 243912 own global accesses (1098 without a top-level declaration); 1039 indirect call records in 257 function types, 69436 (caller, target) pairs, 52 with no address-taken target in the project, 5 with a target that has no body; 14 fixpoint sweeps
+      stats: link: summaries: params: 61886 parameters, 25405 with memory read or written through them (18506 by the function itself, 5638 only through a callee in another TU), 472 passed on to code outside the project, 9776 per-TU escapes cleared by a definition in another TU; 71870 argument roots exported
+      stats: link: indirect: largest target set 2343, 0 unprototyped called types give 0 of 69436 pairs, 50 called types with no target
+      stats: link: indirect: keys: 964 (caller, called type) records matched by pointer key (89 with only null pointers stored, 0 through a record no object has), 28 with a key that falls back to the type, 2 without a key; 69436 pairs against 324201 by type alone; address-taken functions: 10497 only stored under keys, 19 untraced (targets of every call of their type)
+      stats: link: indirect: fallback: 26 records with an open key, 2 with nothing stored under the key; 205 open keys (by the smallest store: 6 pointer without a key, 35 not a function pointer, 0 fixed address, 42 call result or expression, 122 parameter with unseen callers); untraced functions by first use: 0 argument, 12 stored without a key, 0 compared, 7 other use, 0 no use seen
+      stats: link: indirect: params: 673 parameter keys, 232 links from calls through a pointer, 122 opened (callers not all in the project), 0 functions untraced because an argument reaches no body
+      stats: link: indirect: top: 1440 targets x 5 callers = 7200 pairs, first target BswM_Cfg_AC_UserCallout_0_AI_DIAGNOSIS_CONTROL_DISABLE
+      stats: link: indirect: top:   records: 0 by key, 5 open key, 0 nothing stored, 0 no key; 7 untraced targets; first open store <BIG>/e32b5ddf.c:41:1 (parameter with unseen callers); first untraced Core1_main at <BIG>/2045016c.c:522:24 (other use)
+      stats: link: indirect: top: 493 targets x 12 callers = 5916 pairs (by pointer key), first target CdcClient_CommonSignals_GetEcuUid
+      stats: link: indirect: top:   records: 12 by key, 0 open key, 0 nothing stored, 0 no key; 0 untraced targets
+      stats: link: indirect: top: 2343 targets x 2 callers = 4686 pairs (by pointer key), first target CodVar_CodierActiveStatusLesen
+      stats: link: indirect: top:   records: 2 by key, 0 open key, 0 nothing stored, 0 no key; 0 untraced targets
+      stats: link: indirect: top: 2343 targets x 1 callers = 2343 pairs (by pointer key), first target CodVar_CodierActiveStatusLesen
+      stats: link: indirect: top:   records: 1 by key, 0 open key, 0 nothing stored, 0 no key; 0 untraced targets
+      stats: link: indirect: top: 2343 targets x 1 callers = 2343 pairs (by pointer key), first target CodVar_CodierActiveStatusLesen
+      stats: link: indirect: top:   records: 1 by key, 0 open key, 0 nothing stored, 0 no key; 0 untraced targets
+      stats: link: thread ms: export 533.0, fold 387.1 (0 shard locks were busy); freeze 507.1 ms (single thread)
+      stats: link: memory: exports 136.3 MiB folded in total, index 46.4 MiB (15116 paths, 7.5 MiB of names)
+
+[29] get_filesize: size_link_calls  --  OK
+    1 files (link_calls.txt): 107071045 bytes (102.11 MiB)
+    manifest: not found
+    total: 107071045 bytes (102.11 MiB)
+
+[30] run: link_calls_c1b_dump  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=1 --prune --no-resolve-warnings --link-calls --link-c1b --link-dump=<work>/out/link_calls_c1b.txt
+    exit code 0, 246.41 s
+
+[31] compare: cmp_link_calls_c1b  --  OK
+    a: <work>/out/link_calls.txt (107071045 bytes (102.11 MiB))
+    b: <work>/out/link_calls_c1b.txt (107071045 bytes (102.11 MiB))
+    result: EQUAL
+
+[32] run: link_calls_dump_t16  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=16 --prune --no-resolve-warnings --link-calls --link-dump=<work>/out/link_calls_t16.txt
+    exit code 0, 40.86 s
+
+[33] compare: cmp_link_calls_threads  --  OK
+    a: <work>/out/link_calls.txt (107071045 bytes (102.11 MiB))
+    b: <work>/out/link_calls_t16.txt (107071045 bytes (102.11 MiB))
+    result: EQUAL
+
+[34] run: link_uses_dump  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=1 --prune --no-resolve-warnings --link-uses --link-dump=<work>/out/link_uses.txt
+    exit code 0, 243.21 s
+
+[35] get_filesize: size_link_uses  --  OK
+    1 files (link_uses.txt): 174810284 bytes (166.71 MiB)
+    manifest: not found
+    total: 174810284 bytes (166.71 MiB)
+
+[36] run: link_uses_dump_t16  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=16 --prune --no-resolve-warnings --link-uses --link-dump=<work>/out/link_uses_t16.txt
+    exit code 0, 52.10 s
+
+[37] compare: cmp_link_uses_threads  --  OK
+    a: <work>/out/link_uses.txt (174810284 bytes (166.71 MiB))
+    b: <work>/out/link_uses_t16.txt (174810284 bytes (166.71 MiB))
+    result: EQUAL
+
+[38] run: link_db_dump  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe <BIG> --out-dir=<work>/out --cache-dir=<work>/cache --quiet --executor-threads=16 --prune --no-resolve-warnings --link-calls --link-db=<work>/out/link.db --link-dump=<work>/out/link_db_run.txt
+    exit code 0, 41.13 s
+
+[39] get_filesize: size_link_db  --  OK
+    1 files (link.db): 45823224 bytes (43.70 MiB)
+    manifest: not found
+    total: 45823224 bytes (43.70 MiB)
+
+[40] run: from_db_dump  --  OK
+    command: <repo>/build/clang-release/src/sca/proj/cxxp-sca-proj.exe --from-db=<work>/out/link.db --stats --link-dump=<work>/out/link_db_read.txt
+    exit code 0, 1.19 s
+    output:
+      cxxp-sca-proj: database '<work>/out/link.db' (format 1, 0.1.0, options: prune=1 calls=1 uses=0 c1b=0 max_instances=5000 max_template=64 max_depth=32 max_nodes=2000000 max_member_instances=1024): 8999 records, 0 replaced, 8999 TUs, 0 scripts, 0 extern lists, 0 failed sources
+      stats: link: db: 8999 records read (0 replaced), 45823224 bytes, read + fold 283.0 ms, freeze 407.0 ms
+
+[41] compare: cmp_link_db  --  OK
+    a: <work>/out/link_db_run.txt (107071045 bytes (102.11 MiB))
+    b: <work>/out/link_db_read.txt (107071045 bytes (102.11 MiB))
+    result: EQUAL
+
+[42] compare: cmp_link_db_calls  --  OK
+    a: <work>/out/link_calls.txt (107071045 bytes (102.11 MiB))
+    b: <work>/out/link_db_read.txt (107071045 bytes (102.11 MiB))
+    result: EQUAL
+
+[43] remove: remove43  --  OK
+    removed <work>/out
